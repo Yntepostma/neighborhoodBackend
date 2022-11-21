@@ -8,14 +8,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      response.belongsTo(models.marketPlace, { foreignKey: "marketPlaceId" });
     }
   }
   response.init(
     {
       response: { type: DataTypes.TEXT, allowNull: false },
       imageUrl: { type: DataTypes.STRING },
-      userId: { type: DataTypes.INTEGER, allowNull: false },
     },
     {
       sequelize,

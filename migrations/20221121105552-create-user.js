@@ -12,6 +12,7 @@ module.exports = {
       userName: {
         allowNull: false,
         type: Sequelize.STRING,
+        unique: true,
       },
       firstName: {
         allowNull: false,
@@ -24,6 +25,8 @@ module.exports = {
       profilePicture: {
         allowNull: false,
         type: Sequelize.STRING,
+        defaultValue:
+          "https://d32ogoqmya1dw8.cloudfront.net/images/serc/empty_user_icon_256.v2.png",
       },
       password: {
         allowNull: false,
@@ -32,19 +35,11 @@ module.exports = {
       phoneNumber: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        unique: true,
       },
       emailAddress: {
         allowNull: false,
         type: Sequelize.STRING,
-      },
-      preferenceId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        defaultValue: [],
-      },
-      neighborhoodId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

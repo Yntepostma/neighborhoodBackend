@@ -8,13 +8,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      neighborhood.hasMany(models.user, { foreignKey: "neighborhoodId" });
+      neighborhood.hasMany(models.event, { foreignKey: "neighborhoodId" });
+      neighborhood.hasMany(models.marketPlace, {
+        foreignKey: "neighborhoodId",
+      });
       // define association here
     }
   }
   neighborhood.init(
     {
-      zipcode: { type: DataTypes.INTEGER, allowNull: false },
-      description: { type: DataTypes.STRING, allowNull: false },
+      name: { type: DataTypes.STRING, allowNull: false },
+      zipcode: { type: DataTypes.STRING, allowNull: false },
       city: { type: DataTypes.STRING, allowNull: false },
     },
     {

@@ -33,23 +33,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      attendees: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        defaultValue: [],
-      },
-      userId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      neighborhoodId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      categoryId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
