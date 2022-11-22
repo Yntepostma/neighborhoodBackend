@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInstert("events", [
+    await queryInterface.bulkInsert("events", [
       {
         title: "Montly yard sale",
         description:
@@ -13,6 +13,8 @@ module.exports = {
         longtitude: 52.3669,
         latitude: 4.865,
         date: new Date("December 10, 2022 12:00:00"),
+        neighborhoodId: 1,
+        userId: 1,
       },
       {
         title: "Yoga class in the Park",
@@ -22,6 +24,8 @@ module.exports = {
         longtitude: 52.3647,
         latitude: 4.8461,
         date: new Date("December 11, 2022 10:00:00"),
+        neighborhoodId: 2,
+        userId: 2,
       },
     ]);
     /**

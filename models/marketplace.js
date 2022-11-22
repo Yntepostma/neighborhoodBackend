@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   marketPlace.init(
     {
-      title: DataTypes.STRING,
+      title: { type: DataTypes.STRING, allowNull: false },
+      imageUrl: DataTypes.STRING,
       description: DataTypes.TEXT,
     },
     {
