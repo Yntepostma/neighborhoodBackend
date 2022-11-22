@@ -3,8 +3,11 @@ const express = require("express");
 const Neighborhood = require("./models").neighborhood;
 const Event = require("./models").event;
 const Category = require("./models").category;
+const neighborhoodsRouter = require("./Routers/neighborhoods");
 
 const app = express();
+
+app.use("/neighborhoods", neighborhoodsRouter);
 
 const PORT = 4000;
 
