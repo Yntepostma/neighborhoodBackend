@@ -18,9 +18,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   neighborhood.init(
     {
-      name: { type: DataTypes.STRING, allowNull: false },
-      zipcode: { type: DataTypes.STRING, allowNull: false },
-      city: { type: DataTypes.STRING, allowNull: false },
+      postal: { type: DataTypes.STRING, allowNull: false },
+      council: { type: DataTypes.STRING, allowNull: false },
+      neighborhood: { type: DataTypes.STRING, allowNull: false },
+      area: { type: DataTypes.STRING, allowNull: false },
     },
     {
       sequelize,

@@ -9,15 +9,21 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      postal: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      zipcode: {
+      council: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      city: {
+
+      neighborhood: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+
+      area: {
         allowNull: false,
         type: Sequelize.STRING,
       },

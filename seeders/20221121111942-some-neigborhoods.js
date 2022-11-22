@@ -1,25 +1,11 @@
 "use strict";
 
+const neighborhood = require("../neighborhood");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("neighborhoods", [
-      {
-        name: "Kinkerbuurt",
-        zipcode: "1052-1053",
-        city: "Amsterdam",
-      },
-      {
-        name: "Hoofddorppleinbuurt",
-        zipcode: "1058-1059",
-        city: "Amsterdam",
-      },
-      {
-        name: "Schinkelbuurt",
-        zipcode: "1075",
-        city: "Amsterdam",
-      },
-    ]);
+    await queryInterface.bulkInsert("neighborhoods", neighborhood);
     /**
      * Add seed commands here.
      *

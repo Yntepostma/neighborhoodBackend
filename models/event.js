@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   event.init(
     {
-      title: { title: DataTypes.STRING, allowNull: false },
+      title: { type: DataTypes.STRING, allowNull: false },
       description: { type: DataTypes.TEXT, allowNull: false },
       imageUrl: { type: DataTypes.STRING, allowNull: false },
       longtitude: { type: DataTypes.FLOAT, allowNull: false },

@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   user.init(
     {
-      userName: { type: DataTypes.STRING, allowNull: false },
+      userName: { type: DataTypes.STRING, allowNull: false, unique: true },
       firstName: { type: DataTypes.STRING, allowNull: false },
       lastName: { type: DataTypes.STRING, allowNull: false },
       profilePicture: {
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       password: { type: DataTypes.STRING, allowNull: false },
       phoneNumber: { type: DataTypes.INTEGER, allowNull: false },
-      emailAddress: { Type: DataTypes.STRING, allowNull: false },
+      emailAddress: { type: DataTypes.STRING, allowNull: false, unique: true },
     },
     {
       sequelize,
