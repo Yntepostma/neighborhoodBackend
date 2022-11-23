@@ -5,12 +5,15 @@ const router = new Router();
 
 router.get("/:postal", async (req, res) => {
   const { postal } = req.params;
-  console.log(typeof postal);
-  const neighborhood = await Neighborhood.findOne({
+  console.log(postal, "this is the postal ");
+  const neighborhood = await Neighborhood.findAll({
     where: { postal: postal },
   });
-  console.log(neighborhood);
-  res.send(neighborhood);
+  if (!neighborhood) {
+    res.status(400).send("Postal code does not exist");
+  } else {
+    res.status(200).send(neighborhood);
+  }
 });
 
 module.exports = router;

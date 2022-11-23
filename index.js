@@ -1,13 +1,16 @@
 const express = require("express");
+const corsMiddleWare = require("cors");
 
-const Neighborhood = require("./models").neighborhood;
 const Event = require("./models").event;
 const Category = require("./models").category;
 const neighborhoodsRouter = require("./Routers/neighborhoods");
+const authRouter = require("./Routers/auth");
 
 const app = express();
+app.use(corsMiddleWare());
 
 app.use("/neighborhoods", neighborhoodsRouter);
+app.use("/auth", authRouter);
 
 const PORT = 4000;
 
