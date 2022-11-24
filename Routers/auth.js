@@ -6,17 +6,8 @@ const User = require("../models").user;
 const router = new Router();
 
 router.post("/signup", async (req, res) => {
-  const { userName, firstName, lastName, emailAddress, password, phoneNumber } =
-    req.body;
-  console.log("req body", req.body);
-  if (
-    !userName ||
-    !firstName ||
-    !lastName ||
-    !emailAddress ||
-    !password ||
-    phoneNumber
-  ) {
+  console.log(req);
+  if (!userName || !firstName || !lastName || !emailAddress || !password) {
     res.status(400).send("please provide valid input");
   } else {
     const newUser = User.create({
