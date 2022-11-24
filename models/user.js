@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
           "https://d32ogoqmya1dw8.cloudfront.net/images/serc/empty_user_icon_256.v2.png",
       },
       password: { type: DataTypes.STRING, allowNull: false },
-      phoneNumber: { type: DataTypes.INTEGER, allowNull: false },
+      phoneNumber: { type: DataTypes.INTEGER },
       emailAddress: { type: DataTypes.STRING, allowNull: false, unique: true },
     },
     {
