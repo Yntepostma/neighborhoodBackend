@@ -1,6 +1,6 @@
 const { Router, response } = require("express");
 const Neighborhood = require("../models").neighborhood;
-
+const neighborhoods = require("../neighborhood.json");
 const router = new Router();
 
 router.get("/:postal", async (req, res) => {
@@ -14,6 +14,16 @@ router.get("/:postal", async (req, res) => {
   } else {
     res.status(200).send(neighborhood);
   }
+});
+
+router.get("/neighborhood/:postal", async (req, res) => {
+  const { postal } = req.params;
+  const neighborhood = neighborhoods.find((nb) => nb.postal === postal);
+  if (!neighborhood) {
+    res.status(404).send("This postal code does not match a neighborhood");
+    return;
+  }
+  res.send(neighborhood);
 });
 
 module.exports = router;

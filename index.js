@@ -8,7 +8,7 @@ const authRouter = require("./Routers/auth");
 
 const app = express();
 app.use(corsMiddleWare());
-
+app.use(express.json());
 app.use("/neighborhoods", neighborhoodsRouter);
 app.use("/auth", authRouter);
 

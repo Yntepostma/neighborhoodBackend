@@ -11,6 +11,7 @@ module.exports = {
         password: "abcd",
         emailAddress: "kouwearie@hotmail.com",
         phoneNumber: 612345678,
+        neighborhoodId: 1,
       },
       {
         userName: "Tante Sjaan",
@@ -19,6 +20,7 @@ module.exports = {
         password: "efgh",
         emailAddress: "tantesjaan@hotmail.com",
         phoneNumber: 657857857,
+        neighborhoodId: 2,
       },
     ]);
     /**

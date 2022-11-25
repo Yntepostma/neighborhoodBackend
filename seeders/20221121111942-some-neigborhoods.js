@@ -5,7 +5,20 @@ const neighborhood = require("../neighborhood");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("neighborhoods", neighborhood);
+    await queryInterface.bulkInsert("neighborhoods", [
+      {
+        postal: "1057PG",
+        council: "Amsterdam",
+        area: "Overtoomse Veld",
+        neighborhood: "Rembrandtpark noord",
+      },
+      {
+        postal: "4823HE",
+        council: "Breda",
+        area: "Breda-Noord",
+        neighborhood: "Overkroeten",
+      },
+    ]);
     /**
      * Add seed commands here.
      *
