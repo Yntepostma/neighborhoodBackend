@@ -1,4 +1,4 @@
-const { Router, response } = require("express");
+const { Router } = require("express");
 const Neighborhood = require("../models").neighborhood;
 const User = require("../models").user;
 const neighborhoods = require("../neighborhood.json");
@@ -20,8 +20,9 @@ router.post("/", authMiddleware, async (req, res) => {
   const { postal } = req.body;
   const id = req.user.dataValues.id;
   const user = await User.findByPk(id);
+  const neighborhood = neighborhoods.find((nb) => nb.postal === postal);
   const neighborhoodToAdd = await Neighborhood.findOne({
-    where: { postal: postal },
+    where: { neighborhood: neighborhood.neighborhood },
   });
   try {
     if (!neighborhoodToAdd) {
@@ -36,7 +37,7 @@ router.post("/", authMiddleware, async (req, res) => {
       res.status(200).send(user);
     }
   } catch (e) {
-    res.status(200).send(e.message);
+    res.status(400).send(e.message);
   }
 });
 
