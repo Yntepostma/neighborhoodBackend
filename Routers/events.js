@@ -7,6 +7,7 @@ const response = require("../models/response");
 const router = new Router();
 const Category = require("../models").category;
 const EventCategory = require("../models").eventCategories;
+const Attendees = require("../models").attendees;
 
 router.get("/", authMiddleware, async (req, res) => {
   const id = req.user.dataValues.id;
@@ -21,8 +22,17 @@ router.get("/", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/user/:userId", async (req, res) => {
+  const { userId } = req.params;
+  console.log("userId", userId);
+  const user = await User.findOne({
+    where: { id: userId },
+  });
+  res.send(user);
+});
+
 router.get("/categories", async (req, res) => {
-  const categories = await Category.findAll();
+  const categories = await Category.findAll({});
   res.send(categories);
 });
 
@@ -39,6 +49,20 @@ router.delete("/:eventId", authMiddleware, async (req, res) => {
     await eventToDelete.destroy();
     res.status(200).send("event deleted");
   }
+});
+
+router.post("/:eventId", authMiddleware, async (req, res) => {
+  const { eventId } = req.params;
+  console.log("eventId", eventId);
+  const id = req.user.dataValues.id;
+  const user = await User.findByPk(id);
+  const event = await Event.findOne({
+    where: { id: eventId },
+  });
+  const addAttendee = await Attendees.findOrCreate({
+    where: { userId: user.id, eventId: event.id },
+  });
+  res.send("attendee added");
 });
 
 router.post("/", authMiddleware, async (req, res) => {
