@@ -1,9 +1,7 @@
 const { Router } = require("express");
-const Neighborhood = require("../models").neighborhood;
-const Event = require("../models").event;
+const MarketPlace = require("../models").marketPlace;
 const User = require("../models").user;
 const authMiddleware = require("../auth/middleware");
-const response = require("../models/response");
 const router = new Router();
 const Category = require("../models").category;
 const EventCategory = require("../models").eventCategories;
@@ -12,32 +10,27 @@ router.get("/", authMiddleware, async (req, res) => {
   const id = req.user.dataValues.id;
   const user = await User.findByPk(id);
   try {
-    const events = await Event.findAll({
+    const marketplaces = await MarketPlace.findAll({
       where: { neighborhoodId: user.neighborhoodId },
     });
-    res.status(200).send(events);
+    res.status(200).send(marketplaces);
   } catch (e) {
     res.status(400).send("request failed");
   }
 });
 
-router.get("/categories", async (req, res) => {
-  const categories = await Category.findAll();
-  res.send(categories);
-});
-
-router.delete("/:eventId", authMiddleware, async (req, res) => {
-  const { eventId } = req.params;
+router.delete("/:marketPlaceId", authMiddleware, async (req, res) => {
+  const { marketPlaceId } = req.params;
   const id = req.user.dataValues.id;
   const user = await User.findByPk(id);
-  const eventToDelete = await Event.findOne({
-    where: { id: eventId },
+  const marketPlaceToDelete = await MarketPlace.findOne({
+    where: { id: marketPlaceId },
   });
-  if (user.id !== eventToDelete.userId) {
-    res.status(400).send("User not authorized to delete event");
+  if (user.id !== marketPlaceToDelete.userId) {
+    res.status(400).send("User not authorized to delete item");
   } else {
-    await eventToDelete.destroy();
-    res.status(200).send("event deleted");
+    await marketPlaceToDelete.destroy();
+    res.status(200).send("item deleted");
   }
 });
 
@@ -46,12 +39,12 @@ router.post("/", authMiddleware, async (req, res) => {
   const user = await User.findByPk(id);
   const userId = user.id;
   const neighborhoodId = user.neighborhoodId;
-  const { title, description, imageUrl, latitude, longtitude, date, category } =
+  const { title, description, imageUrl, latitude, longtitude, category } =
     req.body;
-  if ((!title, !description, !imageUrl, !latitude, !longtitude, !date)) {
+  if ((!title, !description, !imageUrl, !latitude, !longtitude)) {
     res.status(400).send("Please provide valid input for all fields");
   } else {
-    const newEvent = await Event.create({
+    const newMarketPlace = await MarketPlace.create({
       title,
       description,
       imageUrl,
@@ -59,12 +52,11 @@ router.post("/", authMiddleware, async (req, res) => {
       longtitude,
       userId,
       neighborhoodId,
-      date,
     });
-    const eventCategory = await EventCategory.create({
-      eventId: newEvent.id,
-      categoryId: category,
-    });
+    // const marketPlaceCategory = await EventCategory.create({
+    //   eventId: newEvent.id,
+    //   categoryId: category,
+    // });
     res.status(200).send("Event created");
   }
 });

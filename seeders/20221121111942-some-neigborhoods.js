@@ -10,7 +10,7 @@ module.exports = {
         postal: "1057PG",
         council: "Amsterdam",
         area: "Overtoomse Veld",
-        neighborhood: "Rembrandtpark noord",
+        neighborhood: "Rembrandtpark Noord",
       },
       {
         postal: "4823HE",

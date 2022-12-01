@@ -9,7 +9,6 @@ const router = new Router();
 
 router.post("/signup", async (req, res) => {
   const { userName, firstName, lastName, emailAddress, password } = req.body;
-  console.log("req body", req.body);
   if (!userName || !firstName || !lastName || !emailAddress || !password) {
     return res.status(400).send("please provide valid input");
   }
@@ -79,7 +78,6 @@ router.get("/me", authMiddleware, async (req, res) => {
   const user = await User.findByPk(id, {
     include: [Neighborhood],
   });
-  console.log("user", user);
   res.status(200).send(user);
 });
 

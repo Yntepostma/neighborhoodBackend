@@ -7,7 +7,6 @@ const authMiddleware = require("../auth/middleware");
 
 router.get("/:postal", async (req, res) => {
   const { postal } = req.params;
-  console.log(req.params);
   const neighborhood = neighborhoods.find((nb) => nb.postal === postal);
   if (!neighborhood) {
     res.status(404).send("This postal code does not match a neighborhood");

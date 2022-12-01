@@ -21,6 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       title: { type: DataTypes.STRING, allowNull: false },
       imageUrl: DataTypes.STRING,
       description: DataTypes.TEXT,
+      longtitude: { type: DataTypes.FLOAT, allowNull: false },
+      latitude: { type: DataTypes.FLOAT, allowNull: false },
     },
     {
       sequelize,

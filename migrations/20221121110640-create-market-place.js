@@ -20,7 +20,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-
+      longtitude: {
+        allowNull: false,
+        type: Sequelize.FLOAT,
+      },
+      latitude: {
+        allowNull: false,
+        type: Sequelize.FLOAT,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

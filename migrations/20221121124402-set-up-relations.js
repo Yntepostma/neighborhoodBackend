@@ -43,6 +43,16 @@ module.exports = {
       onDelete: "SET NULL",
     });
 
+    await queryInterface.addColumn("marketPlaces", "neighborhoodId", {
+      type: Sequelize.INTEGER,
+      references: {
+        model: "neighborhoods",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "SET NULL",
+    });
+
     await queryInterface.addColumn("marketPlaces", "categoryId", {
       type: Sequelize.INTEGER,
       references: {
@@ -66,7 +76,7 @@ module.exports = {
     await queryInterface.addColumn("responses", "userId", {
       type: Sequelize.INTEGER,
       references: {
-        model: "users",
+        model: "responses",
         key: "id",
       },
       onUpdate: "CASCADE",
