@@ -10,14 +10,30 @@ const EventCategory = require("../models").eventCategories;
 const Attendees = require("../models").attendees;
 
 router.get("/", authMiddleware, async (req, res) => {
-  const id = req.user.dataValues.id;
+  const id = req.user.id;
   const user = await User.findByPk(id);
   try {
     const events = await Event.findAll({
       where: { neighborhoodId: user.neighborhoodId },
+      include: [
+        {
+          model: User,
+          as: "attendee",
+          attributes: ["userName", "profilePicture"],
+          through: { attributes: [] },
+        },
+        {
+          model: User,
+          as: "owner",
+        },
+        {
+          model: Category,
+        },
+      ],
     });
     res.status(200).send(events);
   } catch (e) {
+    console.log(e.message);
     res.status(400).send("request failed");
   }
 });

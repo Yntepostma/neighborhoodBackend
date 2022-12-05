@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const { toJWT } = require("../auth/jwt");
 const User = require("../models").user;
 const Neighborhood = require("../models").neighborhood;
+const Event = require("../models").event;
+const Marketplace = require("../models").marketPlace;
 const authMiddleware = require("../auth/middleware");
 
 const router = new Router();
@@ -80,7 +82,5 @@ router.get("/me", authMiddleware, async (req, res) => {
   });
   res.status(200).send(user);
 });
-
-module.exports = router;
 
 module.exports = router;

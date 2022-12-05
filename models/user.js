@@ -10,11 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       user.belongsTo(models.neighborhood, { foreignKey: "neighborhoodId" });
-      user.hasMany(models.event, { foreignKey: "userId" });
+      user.hasMany(models.event, { foreignKey: "userId", as: "owner" });
       user.hasMany(models.marketPlace, { foreignKey: "userId" });
       user.belongsToMany(models.event, {
         through: "attendees",
         foreignKey: "userId",
+        as: "attendee",
       });
       user.belongsToMany(models.category, {
         through: "userCategories",
