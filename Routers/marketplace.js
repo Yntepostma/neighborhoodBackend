@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const MarketPlace = require("../models").marketPlace;
+const Response = require("../models").response;
 const User = require("../models").user;
 const authMiddleware = require("../auth/middleware");
 const router = new Router();
@@ -12,11 +13,27 @@ router.get("/", authMiddleware, async (req, res) => {
   try {
     const marketplaces = await MarketPlace.findAll({
       where: { neighborhoodId: user.neighborhoodId },
+      include: [{ model: Response, include: User }, { model: User }],
     });
     res.status(200).send(marketplaces);
   } catch (e) {
     res.status(400).send("request failed");
   }
+});
+
+router.post("/:id/response", authMiddleware, async (req, res) => {
+  const { id } = req.params;
+  const intId = parseInt(id);
+  const { message } = req.body;
+  const userId = req.user.dataValues.id;
+  const user = await User.findByPk(userId);
+  const newResponse = await Response.create({
+    userId: userId,
+    marketPlaceId: intId,
+    response: message,
+  });
+  console.log(newResponse);
+  res.status(200).send("new response created");
 });
 
 router.delete("/:marketPlaceId", authMiddleware, async (req, res) => {

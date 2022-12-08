@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       user.belongsTo(models.neighborhood, { foreignKey: "neighborhoodId" });
       user.hasMany(models.event, { foreignKey: "userId", as: "owner" });
       user.hasMany(models.marketPlace, { foreignKey: "userId" });
+      user.hasMany(models.response, { foreignKey: "userId" });
       user.belongsToMany(models.event, {
         through: "attendees",
         foreignKey: "userId",
