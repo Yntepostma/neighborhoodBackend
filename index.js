@@ -3,6 +3,7 @@ const corsMiddleWare = require("cors");
 const PORT = 4000;
 const app = express();
 
+let users = []
 
 const http = require('http').Server(app)
 
@@ -15,11 +16,22 @@ const socketIO = require('socket.io')(http, {
 socketIO.on('connection', (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
   socket.on('disconnect', () => {
+    users = users.filter((user) => user.socketID !== socket.id);
     console.log('🔥: A user disconnected');
   });
-  socket.on('message', (data) => {
-    console.log(data);
+  socket.on('newUser', (data) => {
+    const existingUser = users.find(user=> user.userName === data.userName)
+    console.log("data", data, "existing", users)
+    if (!existingUser) {
+      users.push(data)}
+    console.log("users", users)
+    socketIO.emit('newUserResponse', users);
   });
+  socket.on('message', (data) => {
+    socketIO.emit('messageResponse', data);
+    console.log("data", data)
+  });
+  
   socket.on('disconnect', () => {
     console.log('🔥: A user disconnected');
   });
